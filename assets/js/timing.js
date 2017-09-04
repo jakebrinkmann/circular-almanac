@@ -1,10 +1,3 @@
-var colors = {
-	Spring: "#2ECC40",
-	Summer: "#FF4136",
-	Fall: "#FF851B",
-	Winter: "#AAAAAA"
-}
-
 // Northern Hemisphere, Astronomical
 // TODO: Calculate these numerically
 var seasons = {
@@ -24,8 +17,9 @@ $(document).ready(function(){
 	updateDisplay(now, currentSeason);
 });
 
+// Determine current season string
 function season(ctime) {
-	var season = "summer",
+	var season = "Summer",
 		keys = Object.keys(seasons);
 	for (var i = 0, N=keys.length; i < N; i++) {
 		var k = keys[i];
@@ -45,10 +39,12 @@ var displayText = $("#time"),
 	clockFace = $("#face"),
 	clockHand = $("#hand");
 
+var shadowBase = '0px 0px 18px ';
+
+// Update text and apply season class
 function updateDisplay(currentTime, currentSeason) {
-	displayText[0].innerHTML = currentTime.format('LLL');
+	displayText[0].innerHTML = currentTime.format('MMMM Do');
 	displaySeason[0].innerHTML = currentSeason + " " + currentTime.format('YYYY')
-	var c = colors[currentSeason];
-	clockFace.css('box-shadow', '0px 1px 8px' + c + ' inset');
-	clockHand.css('box-shadow', '0px 0px 8px' + c);
+	clockFace.attr('class', currentSeason);
+	clockHand.attr('class', currentSeason);
 };
