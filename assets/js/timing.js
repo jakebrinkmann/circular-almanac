@@ -1,21 +1,54 @@
 var colors = {
-	spring: "#2ECC40",
-	summer: "#FF4136",
-	fall: "#FF851B",
-	winter: "#AAAAAA"
+	Spring: "#2ECC40",
+	Summer: "#FF4136",
+	Fall: "#FF851B",
+	Winter: "#AAAAAA"
 }
 
 // Northern Hemisphere, Astronomical
 // TODO: Calculate these numerically
 var seasons = {
     // Spring - March Equinox to June Solstice;
-    spring: "03/20/2018 16:15",
+    Spring: "03/20/2018 16:15",
     // Summer - June Solstice to September Equinox;
-    summer: "06/21/2018 10:07",
+    Summer: "06/21/2018 10:07",
     // Fall (autumn) - September Equinox to December Solstice
-    fall: "09/22/2017 20:02",
+    Fall: "09/22/2017 20:02",
     // Winter - December Solstice to March Equinox.
-    winter: "12/21/2017 16:28"
+    Winter: "12/21/2017 16:28"
 }
 
-var displayTime = $.("#display#time");
+$(document).ready(function(){
+	var now = moment();
+	var currentSeason = season(now);
+	updateDisplay(now, currentSeason);
+});
+
+function season(ctime) {
+	var season = "summer",
+		keys = Object.keys(seasons);
+	for (var i = 0, N=keys.length; i < N; i++) {
+		var k = keys[i];
+		var s = moment(seasons[k], 'MM/DD/YYYY HH:mm');
+		console.log(ctime.format('MM/DD/YY') + '>=' + s.format('MM/DD/YY'))
+		console.log(ctime >= s);
+		if(ctime >= s) {
+			season = k;
+			break;
+		}
+	}
+	return season;
+}
+
+var displayText = $("#time"), 
+	displaySeason = $("#season"),
+	clockFace = $("#face"),
+	clockHand = $("#hand");
+
+function updateDisplay(currentTime, currentSeason) {
+	displayText[0].innerHTML = currentTime.format('LLL');
+	displaySeason[0].innerHTML = currentSeason + " " + currentTime.format('YYYY')
+	var c = colors[currentSeason];
+	clockFace.css('box-shadow', '0px 1px 8px' + c + ' inset');
+	clockHand.css('box-shadow', '0px 0px 8px' + c);
+};
