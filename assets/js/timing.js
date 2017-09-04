@@ -1,37 +1,27 @@
-// Northern Hemisphere, Astronomical
-// TODO: Calculate these numerically
-var seasons = {
-    // Spring - March Equinox to June Solstice;
-    Spring: "03/20/2018 16:15",
-    // Summer - June Solstice to September Equinox;
-    Summer: "06/21/2018 10:07",
-    // Fall (autumn) - September Equinox to December Solstice
-    Fall: "09/22/2017 20:02",
-    // Winter - December Solstice to March Equinox.
-    Winter: "12/21/2017 16:28"
-}
+function cTime() { return new moment(); }
 
 $(document).ready(function(){
-	var now = moment();
-	var currentSeason = season(now);
-	updateDisplay(now, currentSeason);
+	updateDisplay();
 });
 
-// Determine current season string
-function season(ctime) {
-	var season = "Summer",
-		keys = Object.keys(seasons);
-	for (var i = 0, N=keys.length; i < N; i++) {
-		var k = keys[i];
-		var s = moment(seasons[k], 'MM/DD/YYYY HH:mm');
-		console.log(ctime.format('MM/DD/YY') + '>=' + s.format('MM/DD/YY'))
-		console.log(ctime >= s);
-		if(ctime >= s) {
-			season = k;
-			break;
-		}
-	}
-	return season;
+// Convert first-element seasons to current
+function season() {
+	var c = cTime();
+	var seasons = getSeasons(c.toDate().getFullYear());
+	var s = 'Winter';
+	if ( (c >= seasons[1]) && (c < seasons[2]) ) { s = 'Spring'; }
+	if ( (c >= seasons[2]) && (c < seasons[3]) ) { s = 'Summer'; }
+	if ( (c >= seasons[3]) && (c < seasons[4]) ) { s = 'Fall'; }
+	return s
+}
+
+// Determine fraction of current year
+function yearLevel() {
+	var yearsStart = cTime().startOf('year')
+		yearsEnd = cTime().endOf('year');
+	var fraction = ( ( cTime().unix() - yearsStart.unix() ) * 1.0 
+		        / ( yearsEnd.unix() - yearsStart.unix() ) );
+	return fraction
 }
 
 var displayText = $("#time"), 
@@ -42,9 +32,19 @@ var displayText = $("#time"),
 var shadowBase = '0px 0px 18px ';
 
 // Update text and apply season class
-function updateDisplay(currentTime, currentSeason) {
-	displayText[0].innerHTML = currentTime.format('MMMM Do');
-	displaySeason[0].innerHTML = currentSeason + " " + currentTime.format('YYYY')
+function updateDisplay(c, s, f) {
+	var currentTime = c || cTime(),
+		currentSeason = s || season(),
+		fractionYear = f || yearLevel();
+
+	displayText[0].innerHTML = currentTime.format('MMMM Do, YYYY');
+	displaySeason[0].innerHTML = currentSeason
+
 	clockFace.attr('class', currentSeason);
 	clockHand.attr('class', currentSeason);
+
+	var rotation = (fractionYear * 360.00) - 270.00;
+	clockHand.css({
+		'transform': 'rotate(' + rotation + 'deg)'
+	});
 };
