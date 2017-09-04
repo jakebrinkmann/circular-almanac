@@ -1,0 +1,13 @@
+body {
+	background-color: #111111;
+}
+
+#display {
+	color: #7FDBFF;
+	font-family: Monospace;
+	font-size: 2em;
+}
+
+#clock {
+}
+
