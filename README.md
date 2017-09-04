@@ -18,7 +18,7 @@ See [https://jakebrinkmann.github.io/circular-almanac][1]
 * [Moment.js | Home][4]
 * [A Modern Almagest][5]
 
-[0]: http://github.com
+[0]: https://user-images.githubusercontent.com/4110571/30037196-4c73ff24-917e-11e7-9bfb-b4a38acbae91.gif
 [1]: https://jakebrinkmann.github.io/circular-almanac
 [2]: http://clrs.cc/
 [3]: https://www.timeanddate.com/calendar/aboutseasons.html
