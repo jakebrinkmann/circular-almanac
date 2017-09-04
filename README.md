@@ -1,9 +1,9 @@
 # circular-almanac
 A countdown for the seasons
 
-Jake Brinkmann
-2017-09-03
-Public Domain
+Jake Brinkmann  
+2017-09-03  
+Public Domain  
 
 [![Image][0]][0]
 
