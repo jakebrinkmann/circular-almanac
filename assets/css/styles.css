@@ -31,15 +31,24 @@ body {
 	border-radius: 4px 0 0 4px;
 }
 
-.Spring {
-	box-shadow: 0px 0px 8px #2ECC40;
+.Spring { animation: glow_circle_spring 5s infinite forwards; }
+.Summer { animation: glow_circle_summer 5s infinite forwards; }
+.Fall   { animation: glow_circle_fall   5s infinite forwards; }
+.Winter { animation: glow_circle_winter 5s infinite forwards; }
+
+@keyframes glow_circle_spring {
+	  0% { box-shadow: 0px 0px 10px #2ECC40; }
+	100% { box-shadow: 0px 0px 40px #2ECC40; }
 }
-.Summer {
-	box-shadow: 0px 0px 8px #FF4136;
+@keyframes glow_circle_summer {
+	  0% { box-shadow: 0px 0px 10px #FF4136; }
+	100% { box-shadow: 0px 0px 40px #FF4136; }
 }
-.Fall {
-	box-shadow: 0px 0px 8px #FF851B;
+@keyframes glow_circle_fall {
+	  0% { box-shadow: 0px 0px 10px #FF851B; }
+	100% { box-shadow: 0px 0px 40px #FF851B; }
 }
-.Winter {
-	box-shadow: 0px 0px 8px #7FDBFF;
+@keyframes glow_circle_winter {
+	  0% { box-shadow: 0px 0px 10px #7FDBFF; }
+	100% { box-shadow: 0px 0px 40px #7FDBFF; }
 }
