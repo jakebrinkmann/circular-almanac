@@ -42,6 +42,7 @@ function updateDisplay(c, s, f) {
 
 	clockFace.attr('class', currentSeason);
 	clockHand.attr('class', currentSeason);
+	clockHand.attr('title', Math.round(100*fractionYear) + '%');
 
 	var rotation = (fractionYear * 360.00) - 270.00;
 	clockHand.css({
