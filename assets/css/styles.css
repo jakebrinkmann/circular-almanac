@@ -31,10 +31,10 @@ body {
 	border-radius: 4px 0 0 4px;
 }
 
-.Spring { animation: glow_circle_spring 5s infinite forwards; }
-.Summer { animation: glow_circle_summer 5s infinite forwards; }
-.Fall   { animation: glow_circle_fall   5s infinite forwards; }
-.Winter { animation: glow_circle_winter 5s infinite forwards; }
+.Spring { animation: glow_circle_spring 5s infinite alternate forwards; }
+.Summer { animation: glow_circle_summer 5s infinite alternate forwards; }
+.Fall   { animation: glow_circle_fall   5s infinite alternate forwards; }
+.Winter { animation: glow_circle_winter 5s infinite alternate forwards; }
 
 @keyframes glow_circle_spring {
 	  0% { box-shadow: 0px 0px 10px #2ECC40; }
