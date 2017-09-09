@@ -4,7 +4,7 @@ $(document).ready(function(){
 	updateDisplay();
 });
 
-// Convert first-element seasons to current
+// Select current season from array of season start-dates
 function season() {
 	var c = cTime();
 	var seasons = getSeasons(c.toDate().getFullYear());
@@ -29,20 +29,21 @@ var displayText = $("#time"),
 	clockFace = $("#face"),
 	clockHand = $("#hand");
 
-var shadowBase = '0px 0px 18px ';
 
 // Update text and apply season class
 function updateDisplay(c, s, f) {
 	var currentTime = c || cTime(),
 		currentSeason = s || season(),
 		fractionYear = f || yearLevel();
+	var datestr = currentTime.format('MMMM Do'), 
+		yearstr = currentTime.format('YYYY');
 
-	displayText[0].innerHTML = currentTime.format('MMMM Do, YYYY');
-	displaySeason[0].innerHTML = currentSeason
+	displayText[0].innerHTML = 'Today is ' + datestr + ',';
+	displaySeason[0].innerHTML = currentSeason + ' ' + yearstr;
 
 	clockFace.attr('class', currentSeason);
 	clockHand.attr('class', currentSeason);
-	clockHand.attr('title', Math.round(100*fractionYear) + '%');
+	clockHand.attr('title', yearstr + ' is ' + Math.round(100*fractionYear) + '% complete');
 
 	var rotation = (fractionYear * 360.00) - 270.00;
 	clockHand.css({
